@@ -32,28 +32,29 @@ public class Room {
     public void fillMap() throws IOException {
         count = 0;
         roomData=new String[25][25];
+        tileSet = new ArrayList<>();
+        csvReader = new BufferedReader(new FileReader(csvFile));
         while ((line = csvReader.readLine()) != null && roomData != null) {
-            if (count < line.length()) {
-                for (int i = 0; i < roomData[count].length; i++) {
+            if (count < line.length())
+                for (int i = 0; i < roomData[count].length; i++)
                     roomData[count] = line.split(",");
-                }
-            }
             count++;
         }
-        if(roomData != null) {
+        if(roomData != null && tileSet != null) {
             for (int x = 0; x < roomData.length; x++) {
                 for (int y = 0; y < roomData[x].length; y++) {
-                    if (roomData[x][y].equals("w")) {
+                    if (roomData[x][y].equals("w"))
                         tileSet.add(new Wall(y * 25, x * 25, 25, 25));
-                    } else if (roomData[x][y].equals("s")) {
+                    else if (roomData[x][y].equals("s"))
                         tileSet.add(new Start(y * 25, x * 25, 25, 25));
-                    } else if (roomData[x][y].equals("e")) {
+                    else if (roomData[x][y].equals("e"))
                         tileSet.add(new Exit(y * 25, x * 25, 25, 25));
-                    } else if (roomData[x][y].equals("k")) {
+                    else if (roomData[x][y].equals("k"))
                         tileSet.add(new Key(y * 25, x * 25, 25, 25));
-                    } else if (roomData[x][y].equals("d")) {
+                    else if (roomData[x][y].equals("d"))
                         tileSet.add(new Door(y * 25, x * 25, 25, 25));
-                    }
+                    else if (roomData[x][y].equals("a"))
+                        tileSet.add(new Air(y * 25, x * 25, 25, 25));
                 }
             }
         }
@@ -69,15 +70,14 @@ public class Room {
                 Color.RGBtoHSB(98, 52, 0, hsbColors);
                 tileSet.get(i).setColor(pen, Color.getHSBColor(hsbColors[0], hsbColors[1], hsbColors[2]));
             }
-            if (tileSet.get(i) instanceof Key) {
+            if (tileSet.get(i) instanceof Key)
                 tileSet.get(i).setColor(pen, Color.yellow);
-            }
-            if (tileSet.get(i) instanceof Start) {
+            if (tileSet.get(i) instanceof Start)
                 tileSet.get(i).setColor(pen, Color.green);
-            }
-            if (tileSet.get(i) instanceof Exit) {
+            if (tileSet.get(i) instanceof Exit)
                 tileSet.get(i).setColor(pen, Color.red);
-            }
+            if(tileSet.get(i) instanceof Air)
+                tileSet.get(i).setColor(pen, Color.white);
             tileSet.get(i).draw(pen);
         }
     }
@@ -88,7 +88,6 @@ public class Room {
     }
 
     public void reset() throws IOException {
-        roomNum++;
         File csvFile = new File("../room" + roomNum + ".csv");
         clear();
         fillMap();

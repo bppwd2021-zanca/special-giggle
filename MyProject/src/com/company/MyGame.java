@@ -66,6 +66,8 @@ public class    MyGame extends Game  {
                 if(tileSet.get(i).collideLeft(two) || tileSet.get(i).collideRight(two) || tileSet.get(i).collideUp(two) || tileSet.get(i).collideDown(two)){
                     room.setRoomNum(room.getRoomNum()+1);
                     room.reset();
+                    tileSet.remove(i);
+//                    room.fillMap();
                 }
             }
         }
