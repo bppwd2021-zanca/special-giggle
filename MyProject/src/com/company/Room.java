@@ -87,13 +87,6 @@ public class Room {
         return tileSet;
     }
 
-    public void reset() throws IOException {
-        File csvFile = new File("../room" + roomNum + ".csv");
-        clear();
-        fillMap();
-
-    }
-
 
     public void setRoomNum(int roomNum) {
         this.roomNum = roomNum;
@@ -106,6 +99,8 @@ public class Room {
 
     public void clear() {
         tileSet.clear();
+        roomNum++;
+        csvFile = new File("../room" + roomNum + ".csv");
         for (int i = 0; i < roomData.length; i++) {
             for (int j = 0; j < roomData[i].length; j++) {
                 String[] temp = roomData[i];
