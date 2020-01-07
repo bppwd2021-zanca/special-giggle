@@ -70,7 +70,12 @@ public class    MyGame extends Game  {
                         }
                     }
                 }
-            }else if(tileSet.get(i) instanceof Exit){
+            }else if(tileSet.get(i) instanceof Lava){
+                if(tileSet.get(i).collideLeft(two) || tileSet.get(i).collideRight(two) || tileSet.get(i).collideUp(two) || tileSet.get(i).collideDown(two)){
+                    // player dies
+                }
+            }
+            else if(tileSet.get(i) instanceof Exit){
                 if(tileSet.get(i).collideLeft(two) || tileSet.get(i).collideRight(two) || tileSet.get(i).collideUp(two) || tileSet.get(i).collideDown(two)){
                     tileSet.remove(i);
                     room.clear();
