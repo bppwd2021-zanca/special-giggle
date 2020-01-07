@@ -62,9 +62,8 @@ public class Room {
 
     public void draw(Graphics pen) {
         for (int i = 0; i < tileSet.size(); i++) {
-            if (tileSet.get(i) instanceof Wall) {
+            if (tileSet.get(i) instanceof Wall)
                 tileSet.get(i).setColor(pen, Color.gray);
-            }
             if (tileSet.get(i) instanceof Door) {
                 float[] hsbColors = new float[3];
                 Color.RGBtoHSB(98, 52, 0, hsbColors);
@@ -87,13 +86,6 @@ public class Room {
         return tileSet;
     }
 
-    public void reset() throws IOException {
-        File csvFile = new File("../room" + roomNum + ".csv");
-        clear();
-        fillMap();
-
-    }
-
 
     public void setRoomNum(int roomNum) {
         this.roomNum = roomNum;
@@ -106,6 +98,8 @@ public class Room {
 
     public void clear() {
         tileSet.clear();
+        roomNum++;
+        csvFile = new File("../room"+roomNum+".csv");
         for (int i = 0; i < roomData.length; i++) {
             for (int j = 0; j < roomData[i].length; j++) {
                 String[] temp = roomData[i];

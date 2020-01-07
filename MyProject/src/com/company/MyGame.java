@@ -17,6 +17,7 @@ public class    MyGame extends Game  {
     private int health=7;
     private Room room = new Room();
     private ArrayList<Tile> tileSet = room.getTileSet();
+    private boolean redraw = false;
     public MyGame() throws IOException{
 
        int sLocal = -1;
@@ -64,20 +65,20 @@ public class    MyGame extends Game  {
                 }
             }else if(tileSet.get(i) instanceof Exit){
                 if(tileSet.get(i).collideLeft(two) || tileSet.get(i).collideRight(two) || tileSet.get(i).collideUp(two) || tileSet.get(i).collideDown(two)){
-                    room.setRoomNum(room.getRoomNum()+1);
-                    room.reset();
                     tileSet.remove(i);
-//                    room.fillMap();
+                    room.clear();
+                    room.fillMap();
+                    redraw = true;
                 }
             }
         }
     }
     public void draw(Graphics pen) {
+        if(redraw){
+            room.draw(pen);
+        }
         room.draw(pen);
         two.draw(pen);
-        for (int i = 0; i < tileSet.size(); i++) {
-
-        }
     }
     public void clear(){
     }
