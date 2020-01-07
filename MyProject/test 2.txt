@@ -1,0 +1,32 @@
+new test
+//        for(int i=0;i<1;i++) {
+//            EnemyArray.get(i).draw(pen, Color.black);
+//            if (two.intersection(EnemyArray.get(i)).getWidth() != 0) {
+//                pen.setColor(Color.BLACK);
+//                pen.fillRect(two.intersection(EnemyArray.get(i)).getX(), two.intersection(EnemyArray.get(i)).getY(), two.intersection(EnemyArray.get(i)).getWidth(), two.intersection(EnemyArray.get(i)).getHeight());
+//                two.update();
+//            }
+//        }
+//        for(int i=0;i<count;i++){
+//            EnemyArray.get(i).move();
+//        }
+//        for(int i=0;i<count;i++){
+//            EnemyArray.get(i).move();
+//        }
+//        if (time2-time>15000){
+//            for (int i = count; i<count+5; i++) {
+//                EnemyArray.add(new Enemy((int)(Math.random()*(1150-49)+50),(int)(Math.random()*(750-49)+50),50,50,1));
+//            }
+//            count+=5;
+//            time=(int) System.currentTimeMillis();
+//        }
+
+//        for (int i = 0; i < 5; i++) {
+//            EnemyArray.add(new Enemy((int)(Math.random()*(1150-49)+50),(int)(Math.random()*(750-49)+50),50,50,1));
+//            count+=1;
+//        }
+
+//    private ArrayList<Enemy> EnemyArray=new ArrayList<>();
+//    public int count=0;
+//    int time=(int) System.currentTimeMillis();
+//    int time2 =0;
