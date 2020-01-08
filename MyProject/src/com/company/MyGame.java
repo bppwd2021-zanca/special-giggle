@@ -125,6 +125,7 @@ public class    MyGame extends Game  {
             Color.RGBtoHSB(50, 0, 50, hsbColors);
             boss1.draw(pen,Color.getHSBColor(hsbColors[0], hsbColors[1], hsbColors[2]));
             boss1.move();
+            boss1.shoot(pen);
         }
     }
     public void clear(){

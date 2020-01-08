@@ -19,8 +19,13 @@ public class Enemy{
         return x;
     }public int getY(){
         return y;
+    }public int getWidth(){
+        return width;
+    }public int getHeight(){
+        return height;
     }
     public void move(){}
+    public void shoot(Graphics pen){}
 }
 //    public Enemy intersection(Bullet rect){
 //

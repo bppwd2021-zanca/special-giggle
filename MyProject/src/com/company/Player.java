@@ -60,10 +60,12 @@ public class Player {
         return y;
     }
     public int movedown(int x1){
+        //return y+=25;
         return y+=x1;
     }
     public int moveup(int x1){
         return y-=x1;
+        //return y-=25;
     }
     public void fall(){
         this.y+=gravity;
@@ -76,9 +78,11 @@ public class Player {
 
     public int moveright(int x1){
         return x+=x1;
+        //return x+=25;
     }
     public int moveleft(int x1){
         return x-=x1;
+        //return x-=25;
     }
     @Override
     public String toString(){

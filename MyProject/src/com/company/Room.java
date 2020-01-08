@@ -9,7 +9,7 @@ import java.util.Arrays;
 public class Room {
     private String[][] roomData;
     private int count = 0;
-    private int roomNum = 1;
+    private int roomNum = 4;
     private File csvFile = new File("../room" + roomNum + ".csv");
     private BufferedReader csvReader;
     private ArrayList<Tile> tileSet = new ArrayList<>();
