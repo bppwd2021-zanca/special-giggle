@@ -63,13 +63,19 @@ public class    MyGame extends Game  {
                 }
             }else if(tileSet.get(i) instanceof Door){
                 if(two.getHasKey() && (tileSet.get(i).collideLeft(two) || tileSet.get(i).collideRight(two) || tileSet.get(i).collideUp(two) || tileSet.get(i).collideDown(two))){
-                    tileSet.add(i+1,new Air(tileSet.get(i).getX(),tileSet.get(i).getY(),25,25));
-                    tileSet.remove(i);
-
+                    for(int door=0;door<tileSet.size();door++){
+                        if(tileSet.get(door) instanceof Door){
+                            tileSet.add(door+1,new Air(tileSet.get(door).getX(),tileSet.get(door).getY(),25,25));
+                            tileSet.remove(door);
+                        }
+                    }
                 }
             }else if(tileSet.get(i) instanceof Lava){
-//                Kill Player
-            } else if(tileSet.get(i) instanceof Exit){
+                if(tileSet.get(i).collideLeft(two) || tileSet.get(i).collideRight(two) || tileSet.get(i).collideUp(two) || tileSet.get(i).collideDown(two)){
+                    // player dies
+                }
+            }
+            else if(tileSet.get(i) instanceof Exit){
                 if(tileSet.get(i).collideLeft(two) || tileSet.get(i).collideRight(two) || tileSet.get(i).collideUp(two) || tileSet.get(i).collideDown(two)){
                     tileSet.remove(i);
                     room.clear();
