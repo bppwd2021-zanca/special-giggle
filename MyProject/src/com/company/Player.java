@@ -91,42 +91,42 @@ public class Player {
         }
         return(false);
     }
-    public Enemy intersection(Enemy rect) {
-        int top = rect.getX() + rect.getWidth();
-        int bottom = rect.getY() + rect.getHeight();
-        int endX = 0;
-        int endY = 0;
-        boolean crossed = false;
-        for (int k = 0; k < rect.getWidth() + 1; k++) {
-            for (int l = 0; l < rect.getHeight() + 1; l++) {
-                if (this.contains(rect.getX() + k, rect.getY() + l)) {
-
-                    crossed = true;
-                    if (rect.getX() + k > endX) {
-                        endX = rect.getX() + k;
-                    }
-                    if (rect.getY() + l > endY) {
-                        endY = rect.getY() + l;
-                    }
-                    if (rect.getX() + k < top) {
-                        top = rect.getX() + k;
-                    }
-                    if (rect.getY() + l < bottom) {
-                        bottom = rect.getY() + l;
-                    }
-                }
-            }
-        }
-        Enemy newR;
-        newR = new Enemy(x, y, width, height);
-        if (crossed){
-            newR = new Enemy(top, bottom, endX - top, endY - bottom);
-    }
-        else{
-            newR= new Enemy(top,bottom,0,0);
-        }
-        return newR;
-    }
+//    public Enemy intersection(Enemy rect) {
+//        int top = rect.getX() + rect.getWidth();
+//        int bottom = rect.getY() + rect.getHeight();
+//        int endX = 0;
+//        int endY = 0;
+//        boolean crossed = false;
+//        for (int k = 0; k < rect.getWidth() + 1; k++) {
+//            for (int l = 0; l < rect.getHeight() + 1; l++) {
+//                if (this.contains(rect.getX() + k, rect.getY() + l)) {
+//
+//                    crossed = true;
+//                    if (rect.getX() + k > endX) {
+//                        endX = rect.getX() + k;
+//                    }
+//                    if (rect.getY() + l > endY) {
+//                        endY = rect.getY() + l;
+//                    }
+//                    if (rect.getX() + k < top) {
+//                        top = rect.getX() + k;
+//                    }
+//                    if (rect.getY() + l < bottom) {
+//                        bottom = rect.getY() + l;
+//                    }
+//                }
+//            }
+//        }
+//        Enemy newR;
+//        newR = new Enemy(x, y, width, height);
+//        if (crossed){
+//            newR = new Enemy(top, bottom, endX - top, endY - bottom);
+//    }
+//        else{
+//            newR= new Enemy(top,bottom,0,0);
+//        }
+//        return newR;
+//    }
 
     public void setX(int x) {
         this.x = x;

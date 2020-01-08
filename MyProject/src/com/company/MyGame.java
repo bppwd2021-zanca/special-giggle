@@ -14,12 +14,14 @@ public class    MyGame extends Game  {
     public  int y;
     private int playerVelocity = 5;
     private Player two ;
+    private Enemy boss1;
     private int health=7;
     private Room room = new Room();
     private ArrayList<Tile> tileSet = room.getTileSet();
     public MyGame() throws IOException{
 
         two = new Player(startPos()[0],startPos()[1],25,25);
+        boss1 = new Boss1(200,25,100,100);
     }
     public int[] startPos(){
 //        int sLocal = -1;
@@ -118,6 +120,12 @@ public class    MyGame extends Game  {
     public void draw(Graphics pen) {
         room.draw(pen);
         two.draw(pen);
+        if(room.getRoomNum()==5){
+            float[] hsbColors = new float[3];
+            Color.RGBtoHSB(50, 0, 50, hsbColors);
+            boss1.draw(pen,Color.getHSBColor(hsbColors[0], hsbColors[1], hsbColors[2]));
+            boss1.move();
+        }
     }
     public void clear(){
     }

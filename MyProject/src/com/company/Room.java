@@ -117,6 +117,10 @@ public class Room {
         roomNum++;
     }
 
+    public int getRoomNum(){
+        return roomNum;
+    }
+
 
     public void clear() {
         tileSet.clear();
