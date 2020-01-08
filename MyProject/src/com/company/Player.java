@@ -59,12 +59,12 @@ public class Player {
     public int getY(){
         return y;
     }
-//    public int movedown(int x1){
-//        return y+=x1;
-//    }
-//    public int moveup(int x1){
-//        return y-=x1;
-//    }
+    public int movedown(int x1){
+        return y+=x1;
+    }
+    public int moveup(int x1){
+        return y-=x1;
+    }
     public void fall(){
         this.y+=gravity;
     }

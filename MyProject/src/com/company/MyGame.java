@@ -22,24 +22,34 @@ public class    MyGame extends Game  {
         two = new Player(startPos()[0],startPos()[1],25,25);
     }
     public int[] startPos(){
-        int sLocal = -1;
-        int startx = 0;
-        int starty = 0;
-        for (int i = 0; i < tileSet.size(); i++) {
-            if (tileSet.get(i) instanceof Start){
-                sLocal = i;
-                System.out.println("I found the start at location "+sLocal);
-                break;
+//        int sLocal = -1;
+//        int startx = 0;
+//        int starty = 0;
+//        for (int i = 0; i < tileSet.size(); i++) {
+//            if (tileSet.get(i) instanceof Start){
+//                sLocal = i;
+//                System.out.println("I found the start at location "+sLocal);
+//                break;
+//            }
+//        }
+//        if(sLocal != -1 && tileSet.get(sLocal) instanceof Start){
+//            int[] sLocalList = ((Start) tileSet.get(sLocal)).getStartLocation();
+//            startx = sLocalList[0];
+//            starty = sLocalList[1];
+//            System.out.println("I'm setting the start X:"+sLocalList[0]+"   Y:"+sLocalList[1]);
+//            return new int[]{startx,starty};
+//        }
+//        return new int[]{startx,starty};
+        int startX;
+        int startY;
+        // error, nothing inside arraylist
+        for(int i=0;i<tileSet.size();i++){
+            if(tileSet.get(i) instanceof Start){
+                startX=((Start) tileSet.get(i)).getStartLocation()[0];
+                startY=((Start) tileSet.get(i)).getStartLocation()[1];
+                return new int[]{startX,startY};
             }
-        }
-        if(sLocal != -1 && tileSet.get(sLocal) instanceof Start){
-            int[] sLocalList = ((Start) tileSet.get(sLocal)).getStartLocation();
-            startx = sLocalList[0];
-            starty = sLocalList[1];
-            System.out.println("I'm setting the start X:"+sLocalList[0]+"   Y:"+sLocalList[1]);
-            return new int[]{startx,starty};
-        }
-        return new int[]{startx,starty};
+        }return new int[]{100,100};
     }
     public void update() throws IOException {
         two.update();
@@ -77,8 +87,12 @@ public class    MyGame extends Game  {
                     room.clear();
                     room.fillMap();
                     two.setHasKey(false);
-                    two.setX(startPos()[0]);
-                    two.setY(startPos()[1]);
+                    for(int start=0;start<tileSet.size();start++){
+                        if(tileSet.get(start) instanceof Start){
+                            two.setX(((Start) tileSet.get(start)).getStartLocation()[0]);
+                            two.setY(((Start) tileSet.get(start)).getStartLocation()[1]);
+                        }
+                    }
                 }
             }
             else if(tileSet.get(i) instanceof Exit){
@@ -88,8 +102,12 @@ public class    MyGame extends Game  {
                     room.clear();
                     room.fillMap();
                     two.setHasKey(false);
-                    two.setX(startPos()[0]);
-                    two.setY(startPos()[1]);
+                    for(int start=0;start<tileSet.size();start++){
+                        if(tileSet.get(start) instanceof Start){
+                            two.setX(((Start) tileSet.get(start)).getStartLocation()[0]);
+                            two.setY(((Start) tileSet.get(start)).getStartLocation()[1]);
+                        }
+                    }
                 }
                 else if(tileSet.get(i) instanceof Air){
                     two.doFall = true;
@@ -112,11 +130,11 @@ public class    MyGame extends Game  {
         }
         if(ke.getKeyCode() == KeyEvent.VK_UP){
             // jump method
-//            two.moveup(playerVelocity);
+            two.moveup(playerVelocity);
 
         }
         if(ke.getKeyCode() == KeyEvent.VK_DOWN) {
-//            two.movedown(playerVelocity);
+            two.movedown(playerVelocity);
         }
         if(ke.getKeyCode() == KeyEvent.VK_RIGHT) {
             two.moveright(playerVelocity);

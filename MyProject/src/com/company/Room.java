@@ -9,7 +9,7 @@ import java.util.Arrays;
 public class Room {
     private String[][] roomData;
     private int count = 0;
-    private int roomNum = 4;
+    private int roomNum = 1;
     private File csvFile = new File("../room" + roomNum + ".csv");
     private BufferedReader csvReader;
     private ArrayList<Tile> tileSet = new ArrayList<>();
@@ -28,9 +28,11 @@ public class Room {
         roomData=new String[25][25];
         fillMap();
     }
-
     public void fillMap() throws IOException {
         count = 0;
+        LevelMaker maker=new LevelMaker();
+        maker.randomizeMap();
+        String[][] randomMap=maker.getMap();
         roomData=new String[25][25];
         tileSet = new ArrayList<>();
         csvReader = new BufferedReader(new FileReader(csvFile));
@@ -40,25 +42,9 @@ public class Room {
                     roomData[count] = line.split(",");
             count++;
         }
-        if(roomData != null && tileSet != null) {
+        if(roomData != null) {
             for (int x = 0; x < roomData.length; x++) {
                 for (int y = 0; y < roomData[x].length; y++) {
-<<<<<<< HEAD
-                    if (roomData[x][y].equals("w"))
-                        tileSet.add(new Wall(y * 25, x * 25, 25, 25));
-                    else if (roomData[x][y].equals("s"))
-                        tileSet.add(new Start(y * 25, x * 25, 25, 25));
-                    else if (roomData[x][y].equals("e"))
-                        tileSet.add(new Exit(y * 25, x * 25, 25, 25));
-                    else if (roomData[x][y].equals("k"))
-                        tileSet.add(new Key(y * 25, x * 25, 25, 25));
-                    else if (roomData[x][y].equals("d"))
-                        tileSet.add(new Door(y * 25, x * 25, 25, 25));
-                    else if (roomData[x][y].equals("a"))
-                        tileSet.add(new Air(y * 25, x * 25, 25, 25));
-                    else if (roomData[x][y].equals("l"))
-                        tileSet.add(new Lava(y * 25, x * 25, 25, 25));
-=======
                     switch (roomData[x][y]) {
                         case "w":
                             tileSet.add(new Wall(y * 25, x * 25, 25, 25));
@@ -82,7 +68,6 @@ public class Room {
                             tileSet.add(new Lava(y * 25, x * 25, 25, 25));
                             break;
                     }
->>>>>>> cc20e582006936d158d5aeb0cd5ef2263221ca92
                 }
             }
         }
