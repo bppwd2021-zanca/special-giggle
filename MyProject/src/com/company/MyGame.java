@@ -19,7 +19,7 @@ public class    MyGame extends Game  {
     private ArrayList<Tile> tileSet = room.getTileSet();
     public MyGame() throws IOException{
 
-        two = new Player(startPos()[0],startPos()[1],25,25,health);
+        two = new Player(startPos()[0],startPos()[1],25,25);
     }
     public int[] startPos(){
         int sLocal = -1;
@@ -91,6 +91,9 @@ public class    MyGame extends Game  {
                     two.setX(startPos()[0]);
                     two.setY(startPos()[1]);
                 }
+                else if(tileSet.get(i) instanceof Air){
+                    two.doFall = true;
+                }
             }
         }
     }
@@ -109,10 +112,11 @@ public class    MyGame extends Game  {
         }
         if(ke.getKeyCode() == KeyEvent.VK_UP){
             // jump method
-            two.moveup(playerVelocity);
+//            two.moveup(playerVelocity);
+
         }
         if(ke.getKeyCode() == KeyEvent.VK_DOWN) {
-            two.movedown(playerVelocity);
+//            two.movedown(playerVelocity);
         }
         if(ke.getKeyCode() == KeyEvent.VK_RIGHT) {
             two.moveright(playerVelocity);

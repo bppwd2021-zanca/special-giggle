@@ -9,7 +9,7 @@ import java.util.Arrays;
 public class Room {
     private String[][] roomData;
     private int count = 0;
-    private int roomNum = 1;
+    private int roomNum = 4;
     private File csvFile = new File("../room" + roomNum + ".csv");
     private BufferedReader csvReader;
     private ArrayList<Tile> tileSet = new ArrayList<>();
@@ -43,6 +43,7 @@ public class Room {
         if(roomData != null && tileSet != null) {
             for (int x = 0; x < roomData.length; x++) {
                 for (int y = 0; y < roomData[x].length; y++) {
+<<<<<<< HEAD
                     if (roomData[x][y].equals("w"))
                         tileSet.add(new Wall(y * 25, x * 25, 25, 25));
                     else if (roomData[x][y].equals("s"))
@@ -57,6 +58,31 @@ public class Room {
                         tileSet.add(new Air(y * 25, x * 25, 25, 25));
                     else if (roomData[x][y].equals("l"))
                         tileSet.add(new Lava(y * 25, x * 25, 25, 25));
+=======
+                    switch (roomData[x][y]) {
+                        case "w":
+                            tileSet.add(new Wall(y * 25, x * 25, 25, 25));
+                            break;
+                        case "s":
+                            tileSet.add(new Start(y * 25, x * 25, 25, 25));
+                            break;
+                        case "e":
+                            tileSet.add(new Exit(y * 25, x * 25, 25, 25));
+                            break;
+                        case "k":
+                            tileSet.add(new Key(y * 25, x * 25, 25, 25));
+                            break;
+                        case "d":
+                            tileSet.add(new Door(y * 25, x * 25, 25, 25));
+                            break;
+                        case "a":
+                            tileSet.add(new Air(y * 25, x * 25, 25, 25));
+                            break;
+                        case "l":
+                            tileSet.add(new Lava(y * 25, x * 25, 25, 25));
+                            break;
+                    }
+>>>>>>> cc20e582006936d158d5aeb0cd5ef2263221ca92
                 }
             }
         }
@@ -67,18 +93,24 @@ public class Room {
             if (tileSet.get(i) instanceof Wall) {
                 tileSet.get(i).setColor(pen, Color.gray);
             }
-            if (tileSet.get(i) instanceof Door) {
-                float[] hsbColors = new float[3];
-                Color.RGBtoHSB(98, 52, 0, hsbColors);
-                tileSet.get(i).setColor(pen, Color.getHSBColor(hsbColors[0], hsbColors[1], hsbColors[2]));
+            else if (tileSet.get(i) instanceof Door) {
+                float[] hsbColorsDoor = new float[3];
+                Color.RGBtoHSB(98, 52, 0, hsbColorsDoor);
+                tileSet.get(i).setColor(pen, Color.getHSBColor(hsbColorsDoor[0], hsbColorsDoor[1], hsbColorsDoor[2]));
             }
-            if (tileSet.get(i) instanceof Key)
+            else if(tileSet.get(i) instanceof Lava){
+                float[] hsbColorsLava = new float[3];
+                Color.RGBtoHSB(255, 145, 0, hsbColorsLava);
+                tileSet.get(i).setColor(pen, Color.getHSBColor(hsbColorsLava[0], hsbColorsLava[1], hsbColorsLava[2]));
+//                System.out.println("I found lava");
+            }
+            else if (tileSet.get(i) instanceof Key)
                 tileSet.get(i).setColor(pen, Color.yellow);
-            if (tileSet.get(i) instanceof Start)
+            else if (tileSet.get(i) instanceof Start)
                 tileSet.get(i).setColor(pen, Color.green);
-            if (tileSet.get(i) instanceof Exit)
+            else if (tileSet.get(i) instanceof Exit)
                 tileSet.get(i).setColor(pen, Color.red);
-            if(tileSet.get(i) instanceof Air)
+            else if(tileSet.get(i) instanceof Air)
                 tileSet.get(i).setColor(pen, Color.white);
             if(tileSet.get(i) instanceof Lava){
                 float[] hsbColors = new float[3];
@@ -107,7 +139,7 @@ public class Room {
         for (int i = 0; i < roomData.length; i++) {
             for (int j = 0; j < roomData[i].length; j++) {
                 String[] temp = roomData[i];
-                        temp[i] = null;
+                temp[i] = null;
             }
         }
     }

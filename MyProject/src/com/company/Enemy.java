@@ -11,23 +11,19 @@ public class Enemy {
     int x;
 
     int y;
-    int xchange;
-    int ychange;
     int width;
     int height;
-    int health;
     //    int xr=(int) ((Math.random()*10)+1);
 //    int yr=(int) ((Math.random()*10)+1);
     int xr=(3);
     int yr=(3);
 
 
-    public Enemy(int x1, int y1, int width1, int height1,int health1){
+    public Enemy(int x1, int y1, int width1, int height1){
         x=x1;
         y=y1;
         height=height1;
         width=width1;
-        health=health1;
     }
     public void draw(Graphics pen,Color c){
         pen.setColor(c);

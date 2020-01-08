@@ -9,20 +9,24 @@ public class Player {
     private int width = 25;
     private int height = 25;
     Sword[] sword;
-    private int q;
-    private int health;
     private boolean hasKey;
-    public Player(int x1, int y1, int width1, int height1,int health){
+    private int gravity;
+    private int jumpHeight;
+    public boolean doFall;
+    public Player(int x1, int y1, int width1, int height1){
         x=x1;
         y=y1;
+        gravity = 3;
+        jumpHeight = 2;
         height=height1;
         width=width1;
         sword=new Sword[1];
-        health= health;
     }
     public void draw(Graphics pen){
         pen.setColor(Color.blue);
         pen.fillRect(x, y, width, height);
+        if(doFall)
+        this.fall();
     }
     public void update() {
         if (x >= 600) {
@@ -42,13 +46,6 @@ public class Player {
         this.x = mx;
         this.y = my;
     }
-    public void Jump(){
-        y-=100;
-        System.out.println("Jumping: " + y + " And X is: " + x);
-    }
-    public void released(){
-        System.out.println("Falling: " + y + " And X is: " + x);
-    }
     public int getHeight(){
         return height;
     }
@@ -62,12 +59,21 @@ public class Player {
     public int getY(){
         return y;
     }
-    public int movedown(int x1){
-        return y+=x1;
+//    public int movedown(int x1){
+//        return y+=x1;
+//    }
+//    public int moveup(int x1){
+//        return y-=x1;
+//    }
+    public void fall(){
+        this.y+=gravity;
     }
-    public int moveup(int x1){
-        return y-=x1;
+    public void jump(){
+        for (int i = 0; i < 2; i++) {
+            this.y+=5;
+        }
     }
+
     public int moveright(int x1){
         return x+=x1;
     }
@@ -112,12 +118,12 @@ public class Player {
             }
         }
         Enemy newR;
-        newR = new Enemy(x, y, width, height, health);
+        newR = new Enemy(x, y, width, height);
         if (crossed){
-            newR = new Enemy(top, bottom, endX - top, endY - bottom, health);
+            newR = new Enemy(top, bottom, endX - top, endY - bottom);
     }
         else{
-            newR= new Enemy(top,bottom,0,0,health);
+            newR= new Enemy(top,bottom,0,0);
         }
         return newR;
     }
