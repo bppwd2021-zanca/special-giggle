@@ -17,10 +17,12 @@ public class    MyGame extends Game  {
     private int health=7;
     private Room room = new Room();
     private ArrayList<Tile> tileSet = room.getTileSet();
-    private boolean redraw = false;
     public MyGame() throws IOException{
 
-       int sLocal = -1;
+        two = new Player(startPos()[0],startPos()[1],25,25);
+    }
+    public int[] startPos(){
+        int sLocal = -1;
         for (int i = 0; i < tileSet.size(); i++) {
             if (tileSet.get(i) instanceof Start){
                 sLocal = i;
@@ -33,11 +35,13 @@ public class    MyGame extends Game  {
             int startx = sLocalList[0];
             int starty = sLocalList[1];
             System.out.println("I'm setting the start X:"+sLocalList[0]+"   Y:"+sLocalList[1]);
-            two = new Player(startx,starty,25,25,health);
+            return new int[]{startx,starty};
         }
+        return null;
     }
     public void update() throws IOException {
         two.update();
+        tileSet=room.getTileSet();
         if(health<=0){
             System.exit(0);
         }
@@ -63,20 +67,23 @@ public class    MyGame extends Game  {
                     tileSet.remove(i);
 
                 }
-            }else if(tileSet.get(i) instanceof Exit){
+            }else if(tileSet.get(i) instanceof Lava){
+//                Kill Player
+            } else if(tileSet.get(i) instanceof Exit){
                 if(tileSet.get(i).collideLeft(two) || tileSet.get(i).collideRight(two) || tileSet.get(i).collideUp(two) || tileSet.get(i).collideDown(two)){
                     tileSet.remove(i);
                     room.clear();
                     room.fillMap();
-                    redraw = true;
+                    two.setX(startPos()[0]);
+                    two.setY(startPos()[1]);
+                }
+                else if(tileSet.get(i) instanceof Air){
+                    two.doFall = true;
                 }
             }
         }
     }
     public void draw(Graphics pen) {
-        if(redraw){
-            room.draw(pen);
-        }
         room.draw(pen);
         two.draw(pen);
     }
@@ -91,10 +98,11 @@ public class    MyGame extends Game  {
         }
         if(ke.getKeyCode() == KeyEvent.VK_UP){
             // jump method
-            two.moveup(playerVelocity);
+//            two.moveup(playerVelocity);
+
         }
         if(ke.getKeyCode() == KeyEvent.VK_DOWN) {
-            two.movedown(playerVelocity);
+//            two.movedown(playerVelocity);
         }
         if(ke.getKeyCode() == KeyEvent.VK_RIGHT) {
             two.moveright(playerVelocity);
