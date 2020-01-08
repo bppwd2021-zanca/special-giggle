@@ -55,6 +55,8 @@ public class Room {
                         tileSet.add(new Door(y * 25, x * 25, 25, 25));
                     else if (roomData[x][y].equals("a"))
                         tileSet.add(new Air(y * 25, x * 25, 25, 25));
+                    else if (roomData[x][y].equals("l"))
+                        tileSet.add(new Lava(y * 25, x * 25, 25, 25));
                 }
             }
         }
@@ -78,6 +80,11 @@ public class Room {
                 tileSet.get(i).setColor(pen, Color.red);
             if(tileSet.get(i) instanceof Air)
                 tileSet.get(i).setColor(pen, Color.white);
+            if(tileSet.get(i) instanceof Lava){
+                float[] hsbColors = new float[3];
+                Color.RGBtoHSB(255, 140, 0, hsbColors);
+                tileSet.get(i).setColor(pen, Color.getHSBColor(hsbColors[0], hsbColors[1], hsbColors[2]));
+            }
             tileSet.get(i).draw(pen);
         }
     }
@@ -88,18 +95,14 @@ public class Room {
     }
 
 
-    public void setRoomNum(int roomNum) {
-        this.roomNum = roomNum;
-    }
 
-    public int getRoomNum() {
-        return roomNum;
+    public void nextLevel(){
+        roomNum++;
     }
 
 
     public void clear() {
         tileSet.clear();
-        roomNum++;
         csvFile = new File("../room" + roomNum + ".csv");
         for (int i = 0; i < roomData.length; i++) {
             for (int j = 0; j < roomData[i].length; j++) {

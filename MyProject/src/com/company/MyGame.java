@@ -23,6 +23,8 @@ public class    MyGame extends Game  {
     }
     public int[] startPos(){
         int sLocal = -1;
+        int startx = 0;
+        int starty = 0;
         for (int i = 0; i < tileSet.size(); i++) {
             if (tileSet.get(i) instanceof Start){
                 sLocal = i;
@@ -32,12 +34,12 @@ public class    MyGame extends Game  {
         }
         if(sLocal != -1 && tileSet.get(sLocal) instanceof Start){
             int[] sLocalList = ((Start) tileSet.get(sLocal)).getStartLocation();
-            int startx = sLocalList[0];
-            int starty = sLocalList[1];
+            startx = sLocalList[0];
+            starty = sLocalList[1];
             System.out.println("I'm setting the start X:"+sLocalList[0]+"   Y:"+sLocalList[1]);
             return new int[]{startx,starty};
         }
-        return null;
+        return new int[]{startx,starty};
     }
     public void update() throws IOException {
         two.update();
@@ -72,14 +74,20 @@ public class    MyGame extends Game  {
                 }
             }else if(tileSet.get(i) instanceof Lava){
                 if(tileSet.get(i).collideLeft(two) || tileSet.get(i).collideRight(two) || tileSet.get(i).collideUp(two) || tileSet.get(i).collideDown(two)){
-                    // player dies
+                    room.clear();
+                    room.fillMap();
+                    two.setHasKey(false);
+                    two.setX(startPos()[0]);
+                    two.setY(startPos()[1]);
                 }
             }
             else if(tileSet.get(i) instanceof Exit){
                 if(tileSet.get(i).collideLeft(two) || tileSet.get(i).collideRight(two) || tileSet.get(i).collideUp(two) || tileSet.get(i).collideDown(two)){
                     tileSet.remove(i);
+                    room.nextLevel();
                     room.clear();
                     room.fillMap();
+                    two.setHasKey(false);
                     two.setX(startPos()[0]);
                     two.setY(startPos()[1]);
                 }
