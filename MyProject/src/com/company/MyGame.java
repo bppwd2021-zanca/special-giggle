@@ -14,14 +14,15 @@ public class    MyGame extends Game  {
     public  int y;
     private int playerVelocity = 5;
     private Player two ;
-    private Enemy boss1;
+    private Boss1 boss1;
     private int health=7;
+    private int intervalBoss1=0;
     private Room room = new Room();
     private ArrayList<Tile> tileSet = room.getTileSet();
     public MyGame() throws IOException{
 
         two = new Player(startPos()[0],startPos()[1],25,25);
-        boss1 = new Boss1(200,25,100,100);
+        boss1 = new Boss1(400,25,100,100);
     }
     public int[] startPos(){
 //        int sLocal = -1;
@@ -93,6 +94,10 @@ public class    MyGame extends Game  {
                         if(tileSet.get(start) instanceof Start){
                             two.setX(((Start) tileSet.get(start)).getStartLocation()[0]);
                             two.setY(((Start) tileSet.get(start)).getStartLocation()[1]);
+                            if(room.getRoomNum()==5){
+                                boss1.setX(400);
+                                boss1.reset();
+                            }
                         }
                     }
                 }
@@ -125,7 +130,13 @@ public class    MyGame extends Game  {
             Color.RGBtoHSB(50, 0, 50, hsbColors);
             boss1.draw(pen,Color.getHSBColor(hsbColors[0], hsbColors[1], hsbColors[2]));
             boss1.move();
-            boss1.shoot(pen);
+            if(boss1.shoot(pen,two)){
+                // player gets shot
+                two.setX(300);
+                two.setY(500);
+                boss1.setX(400);
+                boss1.reset();
+            }
         }
     }
     public void clear(){
